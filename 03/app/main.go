@@ -11,9 +11,14 @@ func main() {
 	// 初始化配置
 	base.InitConfig("./conf.yml")
 
-	// 第一个HTTP接口
+	// 区分 GET 和 POST 请求
 	http.HandleFunc("/hello", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "Hello GoLift!")
+		if r.Method == http.MethodGet {
+			fmt.Fprintf(w, "GET GoLift!")
+		}
+		if r.Method == http.MethodPost {
+			fmt.Fprintf(w, "POST GoLift!")
+		}
 	})
 
 	// 启动服务
